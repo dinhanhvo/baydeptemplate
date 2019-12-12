@@ -39,12 +39,12 @@ export class LoginService {
      * }
      */
   public login(user: string, credentials: string, language): Observable<any> {
-    let loginUrl = this.appStore.getData(AppStore.PROFILE, {}).api + '/login';
-    //console.log('Login to AD Dashboard using API url: ' + loginUrl);
+    let loginUrl = this.appStore.getData(AppStore.PROFILE, {}).api + '/signin';
+    console.log('Login to AD Dashboard using API url: ' + loginUrl);
     let body = {
-      username: user,
-      password: credentials,
-      language: language
+      usernameOrEmail: user,
+      password: credentials
+      // language: language
     };
     let options = {
       headers: new HttpHeaders({

@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
       data => {
         this.processing = false;
         //console.log('receive login response', data);
-        if (data.errors.length > 0) {
+        if (data.errors > 0) {
           console.log('Failed to login', data.errors);
           this.errors = data.errors.map((it, index) => {
             return it.userMessage;

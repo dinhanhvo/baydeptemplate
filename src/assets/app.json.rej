@@ -1,0 +1,11 @@
+--- app.json
++++ app.json
+@@ -3,7 +3,7 @@
+   "profiles": [
+     {
+       "name": "LOCAL AD ADMIN",
+-      "api": "http://localhost:8100/v1",
++      "api": "http://localhost:8089/api/auth",
+       "default": true
+     },
+     {
