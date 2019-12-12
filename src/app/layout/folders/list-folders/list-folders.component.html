@@ -1,0 +1,63 @@
+<div class="ui-g ui-fluid mb-1">
+  <div class="ui-inputgroup ui-g-12 ui-md-4 ui-lg-4 pl-0">
+    <input
+      type="text"
+      pInputText
+      name="searchName"
+      placeholder="{{ 'Search here' | translate }}"
+      [(ngModel)]="searchData.qFolderNameKey"
+      (keyup)="onSearchFolders()"
+    />
+    <span class="ui-inputgroup-addon"><i class="fa fa-eraser" (click)="onClearSearchName()"></i></span>
+  </div>
+  <div class="ui-g-12 ui-md-8 ui-lg-8 pr-0">
+    <p-dropdown
+      [style]="{ width: '100%' }"
+      name="searchBA"
+      [autoDisplayFirst]="false"
+      [filter]="true"
+      [showClear]="true"
+      [options]="optionsBAs"
+      [(ngModel)]="searchData.qBaId"
+      (onChange)="onSearchFolders()"
+      placeholder="{{ 'Select business universe' | translate }}"
+    >
+    </p-dropdown>
+  </div>
+</div>
+
+<div class="mb-2">
+  <p-table class="mb-2"
+    [columns]="tableCols"
+    [value]="tableData"
+    [resizableColumns]="true"
+    columnResizeMode="expand"
+    selectionMode="single"
+    [(selection)]="selectedFolder"
+    (onRowSelect)="onRowSelect($event)"
+    (onRowUnselect)="onRowUnselect($event)"
+    [paginator]="true"
+    [rows]="rowsLimit"
+    [totalRecords]="searchData.qResultCount"
+    [lazy]="true"
+    (onLazyLoad)="onLazyLoad($event)"
+    [(first)]="searchData.tableFirst"
+    [loading]="isSearching"
+  >
+    <ng-template pTemplate="frozenrows" pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" pResizableColumn [pSortableColumn]="col.field" width="{{ col.width }}">
+          {{ col.header | translate }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td *ngFor="let col of columns">
+          {{ rowData[col.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,291 @@
+diff -r 19bf39730ddc ad-admin/src/app/app-routing.module.ts
+--- a/ad-admin/src/app/app-routing.module.ts	Mon Dec 09 14:32:47 2019 +0700
++++ b/ad-admin/src/app/app-routing.module.ts	Thu Dec 12 10:00:09 2019 +0700
+@@ -1,13 +1,17 @@
+ import { NgModule } from '@angular/core';
+ import { Routes, RouterModule } from '@angular/router';
+ import { AuthGuard } from './shared';
++import { DashboardComponent } from './layout/dashboard/dashboard.component';
+ 
+ const routes: Routes = [
+-  {
+-    path: '',
++  { path: '',
+     loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule),
+-    canActivate: [AuthGuard]
+   },
++  // {
++  //   path: '',
++  //   loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule),
++  //   canActivate: [AuthGuard]
++  // },
+   { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
+   { path: 'signup', loadChildren: () => import('./signup/signup.module').then(m => m.SignupModule) },
+   { path: 'error', loadChildren: () => import('./server-error/server-error.module').then(m => m.ServerErrorModule) },
+diff -r 19bf39730ddc ad-admin/src/app/layout/layout.module.ts
+--- a/ad-admin/src/app/layout/layout.module.ts	Mon Dec 09 14:32:47 2019 +0700
++++ b/ad-admin/src/app/layout/layout.module.ts	Thu Dec 12 10:00:09 2019 +0700
+@@ -7,9 +7,10 @@
+ import { LayoutComponent } from './layout.component';
+ import { SidebarComponent } from './components/sidebar/sidebar.component';
+ import { HeaderComponent } from './components/header/header.component';
++import { DashboardsComponent } from './dashboards/dashboards.component';
+ 
+ @NgModule({
+   imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule],
+-  declarations: [LayoutComponent, SidebarComponent, HeaderComponent]
++  declarations: [LayoutComponent, SidebarComponent, HeaderComponent, DashboardsComponent]
+ })
+ export class LayoutModule {}
+diff -r 19bf39730ddc ad-admin/src/app/login/login.component.ts
+--- a/ad-admin/src/app/login/login.component.ts	Mon Dec 09 14:32:47 2019 +0700
++++ b/ad-admin/src/app/login/login.component.ts	Thu Dec 12 10:00:09 2019 +0700
+@@ -64,7 +64,7 @@
+       data => {
+         this.processing = false;
+         //console.log('receive login response', data);
+-        if (data.errors.length > 0) {
++        if (data.errors > 0) {
+           console.log('Failed to login', data.errors);
+           this.errors = data.errors.map((it, index) => {
+             return it.userMessage;
+diff -r 19bf39730ddc ad-admin/src/app/shared/services/login.service.ts
+--- a/ad-admin/src/app/shared/services/login.service.ts	Mon Dec 09 14:32:47 2019 +0700
++++ b/ad-admin/src/app/shared/services/login.service.ts	Thu Dec 12 10:00:09 2019 +0700
+@@ -39,12 +39,12 @@
+      * }
+      */
+   public login(user: string, credentials: string, language): Observable<any> {
+-    let loginUrl = this.appStore.getData(AppStore.PROFILE, {}).api + '/login';
+-    //console.log('Login to AD Dashboard using API url: ' + loginUrl);
++    let loginUrl = this.appStore.getData(AppStore.PROFILE, {}).api + '/signin';
++    console.log('Login to AD Dashboard using API url: ' + loginUrl);
+     let body = {
+-      username: user,
+-      password: credentials,
+-      language: language
++      usernameOrEmail: user,
++      password: credentials
++      // language: language
+     };
+     let options = {
+       headers: new HttpHeaders({
+diff -r 19bf39730ddc ad-admin/src/assets/app.json
+--- a/ad-admin/src/assets/app.json	Mon Dec 09 14:32:47 2019 +0700
++++ b/ad-admin/src/assets/app.json	Thu Dec 12 10:00:09 2019 +0700
+@@ -3,7 +3,7 @@
+   "profiles": [
+     {
+       "name": "LOCAL AD ADMIN",
+-      "api": "http://localhost:8100/v1",
++      "api": "http://localhost:8089/api/auth",
+       "default": true
+     },
+     {
+diff -r 19bf39730ddc ad-clt/src/main/java/codix/ad/clt/command/BaseCommandProcessor.java
+--- a/ad-clt/src/main/java/codix/ad/clt/command/BaseCommandProcessor.java	Mon Dec 09 14:32:47 2019 +0700
++++ b/ad-clt/src/main/java/codix/ad/clt/command/BaseCommandProcessor.java	Thu Dec 12 10:00:09 2019 +0700
+@@ -112,8 +112,11 @@
+             options.put(optName, objVal);
+             if (optName.equalsIgnoreCase(Constants.OPTION.MULTILPLE_OBJECTS)) {
+                 isMultipleFlag = false;
++            } else if (optName.equalsIgnoreCase(Constants.OPTION.WILDCARD)) {
++                options.put(Constants.OPTION.WILDCARD, Constants.OPTION.WILDCARD);
+             }
+         }
++
+         if (isMultipleFlag) {
+             options.put(Constants.OPTION.MULTILPLE_OBJECTS, Constants.OPTION.MULTILPLE_OBJECTS);
+         }
+diff -r 19bf39730ddc ad-clt/src/main/java/codix/ad/clt/service/impl/CltExportServiceImpl.java
+--- a/ad-clt/src/main/java/codix/ad/clt/service/impl/CltExportServiceImpl.java	Mon Dec 09 14:32:47 2019 +0700
++++ b/ad-clt/src/main/java/codix/ad/clt/service/impl/CltExportServiceImpl.java	Thu Dec 12 10:00:09 2019 +0700
+@@ -163,43 +163,98 @@
+     }
+ 
+     private void exportItem(Object argVal, ImportExportContext ctx) throws AdCltException {
+-
+     }
+ 
+-    private void exportItemClass(Object argVal, ImportExportContext ctx) throws AdCltException {
++    private void exportItemClass(Object argVal, ImportExportContext ctx) throws CoreException {
++        List<String> ids = CltUtil.getCmdArgs(argVal);
++        if (ids == null || ids.size() < 1) {
++            throw new AdCltException("No ba to export");
++        }
+ 
++        for (String sId : ids) {
++            xmlExpMng.exportItemClass(sId, ctx);
++        }
+     }
+ 
+     private void exportJoin(Object argVal, ImportExportContext ctx) throws AdCltException {
+ 
+     }
+ 
+-    private void exportHierarchy(Object argVal, ImportExportContext ctx) throws AdCltException {
++    private void exportHierarchy(Object argVal, ImportExportContext ctx) throws CoreException {
++        List<String> ids = CltUtil.getCmdArgs(argVal);
++        if (ids == null || ids.size() < 1) {
++            throw new AdCltException("No ba to export");
++        }
+ 
++        for (String sId : ids) {
++            xmlExpMng.exportHierarchy(sId, ctx);
++        }
+     }
+ 
+-    private void exportMpSheet(Object argVal, ImportExportContext ctx) throws AdCltException {
++    private void exportMpSheet(Object argVal, ImportExportContext ctx) throws CoreException {
++        List<String> ids = CltUtil.getCmdArgs(argVal);
++        if (ids == null || ids.size() < 1) {
++            throw new AdCltException("No ba to export");
++        }
+ 
++        for (String sId : ids) {
++            xmlExpMng.exportHierarchy(sId, ctx);
++        }
+     }
+ 
+-    private void exportMpSchedule(Object argVal, ImportExportContext ctx) throws AdCltException {
++    private void exportMpSchedule(Object argVal, ImportExportContext ctx) throws CoreException {
++        List<String> ids = CltUtil.getCmdArgs(argVal);
++        if (ids == null || ids.size() < 1) {
++            throw new AdCltException("No ba to export");
++        }
+ 
++        for (String sId : ids) {
++            xmlExpMng.exportHierarchy(sId, ctx);
++        }
+     }
+ 
+-    private void exportMpWorkbook(Object argVal, ImportExportContext ctx) throws AdCltException {
++    private void exportMpWorkbook(Object argVal, ImportExportContext ctx) throws CoreException {
++        List<String> ids = CltUtil.getCmdArgs(argVal);
++        if (ids == null || ids.size() < 1) {
++            throw new AdCltException("No ba to export");
++        }
+ 
++        for (String sId : ids) {
++            xmlExpMng.exportMpWorkbook(sId, ctx);
++        }
+     }
+ 
+-    private void exportPdfTpl(Object argVal, ImportExportContext ctx) throws AdCltException {
++    private void exportPdfTpl(Object argVal, ImportExportContext ctx) throws CoreException {
++        List<String> ids = CltUtil.getCmdArgs(argVal);
++        if (ids == null || ids.size() < 1) {
++            throw new AdCltException("No ba to export");
++        }
+ 
++        for (String sId : ids) {
++            xmlExpMng.exportPdfTemplate(sId, ctx);
++        }
+     }
+ 
+-    private void exportPdfTplWb(Object argVal, ImportExportContext ctx) throws AdCltException {
++    private void exportPdfTplWb(Object argVal, ImportExportContext ctx) throws CoreException {
++        List<String> ids = CltUtil.getCmdArgs(argVal);
++        if (ids == null || ids.size() < 1) {
++            throw new AdCltException("No ba to export");
++        }
+ 
++        for (String sId : ids) {
++            xmlExpMng.exportHierarchy(sId, ctx);
++        }
+     }
+ 
+-    private void exportWb(Object argVal, ImportExportContext ctx) throws AdCltException {
++    private void exportWb(Object argVal, ImportExportContext ctx) throws CoreException {
++        List<String> ids = CltUtil.getCmdArgs(argVal);
++        if (ids == null || ids.size() < 1) {
++            throw new AdCltException("No ba to export");
++        }
+ 
++        for (String sId : ids) {
++            xmlExpMng.exportWorkbook(sId, ctx);
++        }
+     }
+ 
+     private void preExport(ImportExportContext ctx) {
+@@ -267,7 +322,7 @@
+         try {
+             saveExportedPaths(ctx);
+             boolean isMulti = ctx.isMultiObjects();
+-//            if (isMulti) {
++            if (isMulti) {
+                 /**
+                  * compress exported objects xml file into tar.gz file delete
+                  * source folder
+@@ -280,7 +335,7 @@
+                     updater.logResource(ExportXmlConstant.STATUS_EXPORT_COMPRESS_SUCCEED);
+                 }
+                 LOGGER.info("Compress file successfully");
+-//            }
++            }
+         } catch (Exception ex) {
+             LOGGER.error("Post export error", ex);
+             throw new AdCltException(ex.getMessage(), ex);
+diff -r 19bf39730ddc ad-core/src/main/java/codix/report/manager/XmlExportManager.java
+--- a/ad-core/src/main/java/codix/report/manager/XmlExportManager.java	Mon Dec 09 14:32:47 2019 +0700
++++ b/ad-core/src/main/java/codix/report/manager/XmlExportManager.java	Thu Dec 12 10:00:09 2019 +0700
+@@ -26,19 +26,17 @@
+             ImportExportContext context) throws CoreException;
+ 
+     boolean exportHierarchy(
+-            String hierarchyName, boolean wildcard,
++            String hierarchyName,
+             ImportExportContext context)
+             throws CoreException;
+ 
+     boolean exportItemClass(
+             String itemClassName,
+-            boolean wildcard,
+             ImportExportContext context)
+             throws CoreException;
+ 
+     boolean exportFunction(
+             String objectName,
+-//            boolean wildcard,
+             ImportExportContext context)
+             throws CoreException;
+ 
+diff -r 19bf39730ddc ad-core/src/main/java/codix/report/manager/impl/XmlExportManagerImpl.java
+--- a/ad-core/src/main/java/codix/report/manager/impl/XmlExportManagerImpl.java	Mon Dec 09 14:32:47 2019 +0700
++++ b/ad-core/src/main/java/codix/report/manager/impl/XmlExportManagerImpl.java	Thu Dec 12 10:00:09 2019 +0700
+@@ -575,12 +575,13 @@
+     }
+ 
+     @Override
+-    public boolean exportItemClass(String itemClassName, boolean wildcard,
++    public boolean exportItemClass(String itemClassName,
+             ImportExportContext ctx)
+             throws CoreException {
+-        LOGGER.info("Exporting itemclass: " + itemClassName + ", wilcard: " + wildcard);
+         String exportFilePath = ctx.getFilePath();
+         StatusUpdater updater = ctx.getUpdater();
++        boolean wildcard = ctx.isWildcard();
++        LOGGER.info("Exporting itemclass: " + itemClassName + ", wilcard: " + wildcard);
+         boolean isMultipleObjects = ctx.isMultiObjects();
+         String matchMode = ctx.getMatchMode();
+         // String lang = ctx.getLang();
+@@ -1534,7 +1535,8 @@
+             throws CoreException {
+         List<ItemClass> itemClasses = itemClassManager.getAllItemClasses();
+         for (ItemClass itemClass : itemClasses) {
+-            exportItemClass(itemClass.getDeveloperKey(), false, ctx);
++            ctx.setWildcard(false);
++            exportItemClass(itemClass.getDeveloperKey(), ctx);
+         }
+     }
+ 
+@@ -1542,7 +1544,8 @@
+             throws CoreException {
+         List<Hierarchy> hierarchies = hierarchyManager.getAllHierarchies();
+         for (Hierarchy hi : hierarchies) {
+-            exportHierarchy(hi.getDeveloperKey(), false, ctx);
++            ctx.setWildcard(false);
++            exportHierarchy(hi.getDeveloperKey(), ctx);
+         }
+     }
+ 

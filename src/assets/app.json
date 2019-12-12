@@ -1,0 +1,15 @@
+{
+  "langs": ["en", "fr", "es", "de"],
+  "profiles": [
+    {
+      "name": "LOCAL AD ADMIN",
+      "api": "http://localhost:8100/v1",
+      "default": true
+    },
+    {
+      "name": "ADDEV AD ADMIN",
+      "api": "https://addevad.codixfr.private:34022/ad-admin/v1",
+      "default": false
+    }
+  ]
+}

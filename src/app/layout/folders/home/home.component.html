@@ -1,0 +1,129 @@
+<div class="p-fluid ">
+  <div class="p-grid">
+    <div class="p-col-7 p-md-6 p-sm-12">
+      <p-panel header="Available folders" [toggleable]="true">
+        <app-list-folders
+          [rowsLimit]="12"
+          (onFolderChange)="onFolderSelect($event)">
+        </app-list-folders>
+        <div class="text-right">
+          <button pButton icon="fa fa-plus" type="button" label="New object from DB" (click)="onNewFdFromDb()"></button>
+          <button pButton class="ml-2" icon="fa fa-plus" type="button" label="New custom object" (click)="onNewCustomFd()"></button>
+        </div>
+      </p-panel>
+    </div>
+    <div class="p-col-5 p-md-6 p-sm-12">
+      <p-panel header="Update folder" [toggleable]="true">
+        <router-outlet></router-outlet>
+      </p-panel>
+    </div>
+  </div>
+  <div>
+    <p-tabView>
+      <p-tabPanel header="Attributes">
+        <div class="p-grid">
+          <div class="p-col-7">
+            <p-table [value]="attrs">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Dev. Key</th>
+                  <th>#</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-it>
+                <tr>
+                  <td>{{ it.name }}</td>
+                  <td>{{ it.description }}</td>
+                  <td>{{ it.developerKey }}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+          <div class="p-col-5">
+            <p-panel header="Create / update attribute">
+              <br /><br /><br /><br /><br />
+              <br /><br /><br /><br /><br />
+            </p-panel>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Filters">
+        <div class="p-grid">
+          <div class="p-col-7">
+            <p-table [value]="filters">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Name</th>
+                  <th>Expression</th>
+                  <th>Dev. Key</th>
+                  <th>Description</th>
+                  <th>#</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-it>
+                <tr>
+                  <td>{{ it.name }}</td>
+                  <td>{{ it.formula }}</td>
+                  <td>{{ it.developerKey }}</td>
+                  <td>{{ it.description }}</td>
+                  <td>{{ it.id }}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+          <div class="p-col-5">
+            <p-panel header="Create / update filter">
+              <div>View/Edit filter properties form</div>
+              <br /><br /><br /><br /><br />
+              <br /><br /><br /><br /><br />
+            </p-panel>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Joins">
+        <div class="p-grid">
+          <div class="p-col-7">
+            <p-table [value]="joins">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Name</th>
+                  <th>Expression</th>
+                  <th>Dev. Key</th>
+                  <th>Description</th>
+                  <th>#</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-it>
+                <tr>
+                  <td>{{ it.name }}</td>
+                  <td>{{ it.formula }}</td>
+                  <td>{{ it.developerKey }}</td>
+                  <td>{{ it.description }}</td>
+                  <td>{{ it.id }}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+          <div class="p-col-5">
+            <p-panel header="Create / update join">
+              <div>View/Edit join properties form</div>
+              <br /><br /><br /><br /><br />
+              <br /><br /><br /><br /><br />
+            </p-panel>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Bas">
+        <br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br />
+      </p-tabPanel>
+      <p-tabPanel header="Dependencies">
+        <div>List of dependencies</div>
+        <br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br />
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="login-page" [@routerTransition]>
+  <div class="row justify-content-md-center">
+    <div class="col-md-4">
+      <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+      <h1>Welcome to AD ADMIN</h1>
+      <form role="form" name="login" (ngSubmit)="onSubmitLogin()">
+        <div *ngIf="errors.length > 0">
+          <div *ngFor="let error of errors" class="error">{{ error }}</div>
+        </div>
+        <div class="form-content">
+          <div class="form-group">
+            <input
+              type="text"
+              [(ngModel)]="username"
+              name="username"
+              class="form-control input-underline input-lg"
+              id="username"
+              autocomplete="new-username"
+              placeholder="{{ 'login.username' | translate }}"
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="password"
+              [(ngModel)]="password"
+              name="password"
+              class="form-control input-underline input-lg"
+              id="password"
+              autocomplete="new-password"
+              placeholder="{{ 'login.password' | translate }}"
+            />
+          </div>
+
+          <div class="form-group">
+            <div class="form-row ui-fluid" style="text-align: left">
+              <div class="col-sm-4">
+                <label>{{ 'login.language' | translate }}</label>
+              </div>
+              <div class="col-sm-8">
+                <p-dropdown name="lang" [options]="siLangs" [(ngModel)]="selLang" (onChange)="onLangChanged($event)">
+                </p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-row ui-fluid" style="text-align: left">
+              <div class="col-sm-4">
+                <label>{{ 'login.server' | translate }}</label>
+              </div>
+              <div class="col-sm-8">
+                <p-dropdown
+                  name="profile"
+                  [options]="profiles"
+                  optionLabel="name"
+                  [(ngModel)]="selProfile"
+                  (onChange)="onChangeProfile()"
+                ></p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button class="btn rounded-btn" ng-disabled="processing" type="submit">
+            {{ 'login.login' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

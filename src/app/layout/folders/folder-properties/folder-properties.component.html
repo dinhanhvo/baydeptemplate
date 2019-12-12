@@ -1,0 +1,108 @@
+<div class="text-center"> 
+  <p-progressSpinner *ngIf="isWorking" [style]="{ width: '30px', height: '30px', 'z-index': 1000, position: 'absolute' }"></p-progressSpinner>
+</div>
+
+<p-tabView>
+  <p-tabPanel header="{{ 'Properties' | translate }}">
+
+    <div class="form-group form-row mb-0">
+      <label class="col-3 col-form-label text-right">{{ 'Displayed Name' | translate }}</label>
+      <div class="col">
+          <input name="transName" readonly class="form-control-plaintext" 
+            [ngModel]="translations[sessionLang].name > '' ? translations[sessionLang].name : folderProps.name"
+          />
+      </div>
+    </div>
+    <div class="form-group form-row">
+      <label class="col-3 col-form-label text-right">{{ 'Description' | translate }}</label>
+      <div class="col">
+        <textarea name="customFolderSQL" rows="2" readonly pInputTextarea class="form-control" 
+          [ngModel]="translations[sessionLang].description > '' ? translations[sessionLang].description : folderProps.description"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="form-group form-row">
+      <label class="col-3 col-form-label text-right">{{ 'Base Name' | translate }}</label>
+      <div class="col">
+        <input name="name" type="text" pInputText class="form-control" maxlength="100" [(ngModel)]="folderProps.name"/>
+      </div>
+    </div>
+    <div class="form-group form-row">
+      <label class="col-3 col-form-label text-right">{{ 'Base Description' | translate }}</label>
+      <div class="col">
+        <textarea name="description" rows="2" pInputTextarea class="form-control" maxlength="240" [(ngModel)]="folderProps.description"></textarea>
+      </div>
+    </div>
+    <div class="form-group form-row">
+      <label class="col-3 col-form-label text-right">{{ 'Visible to user' | translate }}</label>
+      <div class="col">
+        <p-dropdown name="notHidden" [options]="notYesNo" [(ngModel)]="folderProps.hidden" [style]="{ width: '100%' }"></p-dropdown>      
+      </div>
+    </div>
+
+    <div class="form-group form-row mb-0">
+      <label class="col-3 col-form-label text-right">{{ 'Developer key' | translate }}</label>
+      <div class="col">
+        <input name="developerKey" readonly class="form-control-plaintext" [ngModel]="folderProps.developerKey"/>
+      </div>
+    </div>
+    <div class="form-group form-row mb-0">
+      <label class="col-3 col-form-label text-right">{{ 'Application owner' | translate }}</label>
+      <div class="col">
+        <input name="appOwner" readonly class="form-control-plaintext" [ngModel]="folderProps.createdBy"/>
+      </div>
+    </div>
+    <div class="form-group form-row mb-0">
+      <label class="col-3 col-form-label text-right">{{ 'DB Owner' | translate }}</label>
+      <div class="col">
+        <input name="extOwner" readonly class="form-control-plaintext" [ngModel]="folderProps.extOwner"/>
+      </div>
+    </div>
+    <div class="form-group form-row mb-0">
+      <label class="col-3 col-form-label text-right">{{ 'DB Object' | translate }}</label>
+      <div class="col">
+        <input name="extTable" readonly class="form-control-plaintext" [ngModel]="folderProps.extTable"/>
+      </div>
+    </div>
+    <div class="form-group form-row mb-0">
+      <label class="col-3 col-form-label text-right">{{ 'Valid' | translate }}</label>
+      <div class="col">
+        <input name="isValidSQL" readonly class="form-control-plaintext"  [ngModel]="folderProps.isValidSQL == null ? '-' : folderProps.isValidSQL"/>
+      </div>
+    </div>
+    <div class="form-group form-row mb-1">
+      <label class="col-3 col-form-label text-right">{{ 'Custom SQL' | translate }}</label>
+      <div class="col">
+        <textarea name="customFolderSQL" rows="2" readonly pInputTextarea class="form-control" [ngModel]="folderProps.customFolderSQL"></textarea>
+      </div>
+    </div>
+  </p-tabPanel>
+
+  <p-tabPanel header="{{ 'Translations' | translate }}">
+    <p-accordion [multiple]="true">
+      <p-accordionTab *ngFor="let lang of languages" header="{{lang.label}}" [selected]="lang.value==sessionLang">
+        <div class="form-group form-row">
+          <label class="col-2 col-form-label text-right">{{ 'Folder name' | translate }}</label>
+          <div class="col">
+            <input name="translationName" type="text" pInputText class="form-control" maxlength="100" [(ngModel)]="translations[lang.value].name"/>
+          </div>
+        </div>
+        <div class="form-group form-row">
+          <label class="col-2 col-form-label text-right">{{ 'Description' | translate }}</label>
+          <div class="col">
+            <textarea name="translationDescription" rows="2" pInputTextarea class="form-control" maxlength="240" [(ngModel)]="translations[lang.value].description"></textarea>
+          </div>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+  </p-tabPanel>
+</p-tabView>
+
+<div class="text-right mt-1">
+  <button pButton icon="fa fa-save" type="button" label="Save" (click)="onSave()"></button>
+  <button pButton class="ml-2" icon="fa fa-undo" type="button" label="Cancel" (click)="onCancel()"></button>
+</div>
+
+<p-confirmDialog header="{{ 'Confirmation'  | translate }}" icon="pi pi-exclamation-triangle" [style]="{width: '35vw'}"></p-confirmDialog>
+<p-toast [style]="{marginTop: '80px', width: '25vw'}"></p-toast>
