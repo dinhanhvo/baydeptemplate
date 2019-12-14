@@ -1,18 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
+      { path: '', redirectTo: 'home', pathMatch: 'prefix' },
       { path: 'bas', loadChildren: () => import('./bas/bas.module').then(m => m.BasModule) },
       {
         path: 'dashboards',
         loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule)
       },
+      {
+        path: 'home',
+        component: HomepageComponent
+      },
+
       {
         path: 'folders',
         loadChildren: () => import('./folders/folders.module').then(m => m.FoldersModule)

@@ -8,9 +8,12 @@ import { LayoutComponent } from './layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DashboardsComponent } from './dashboards/dashboards.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { HomeHeaderComponent } from './components/home-header/home-header.component';
+import { HomeFooterComponent } from './components/home-footer/home-footer.component';
 
 @NgModule({
   imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule],
-  declarations: [LayoutComponent, SidebarComponent, HeaderComponent, DashboardsComponent]
+  declarations: [LayoutComponent, SidebarComponent, HeaderComponent, DashboardsComponent, HomepageComponent, HomeHeaderComponent, HomeFooterComponent]
 })
 export class LayoutModule {}

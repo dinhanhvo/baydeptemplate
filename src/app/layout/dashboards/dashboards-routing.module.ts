@@ -8,7 +8,7 @@ const routes: Route[] = [
     path: '',
     component: DashboardsComponent,
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'prefix' },
+      // { path: '', redirectTo: 'home', pathMatch: 'prefix' },
       {
         path: 'home',
         component: HomeComponent
