@@ -41,7 +41,7 @@
     }
     #Categories {
         background-color: cadetblue; 
-        height: 300px;
+        height: 100%;
     }
     .FullWdith {
         width: 100%;
@@ -134,7 +134,7 @@
         top: 40px;
         right: 40px;
     }
-    #chk:checked ~ .menu{
+    #chk:checked ~ .MenuHeader{
         right: 0;
     }
 }
