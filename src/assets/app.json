@@ -2,13 +2,14 @@
   "langs": ["en", "fr", "es", "de"],
   "profiles": [
     {
-      "name": "LOCAL AD ADMIN",
+      "name": "LOCAL ADMIN",
       "api": "http://localhost:8089/api/auth",
       "default": true
-    },
+    }
+    ,
     {
-      "name": "ADDEV AD ADMIN",
-      "api": "https://addevad.codixfr.private:34022/ad-admin/v1",
+      "name": "DEV ADMIN",
+      "api": "https://smartevn.com",
       "default": false
     }
   ]

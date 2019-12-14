@@ -1,28 +1,30 @@
+$fontcolor: #004D47;
+$headerHeight: 50px;
 *{
     margin: 0;
     padding: 0;
     font-family: "montserrat",sans-serif;
   }
   .header{
-    height: 100px;
-    background: #34495e;
+    height: $headerHeight;
+    background: #D4E9FB;
     padding: 0 20px;
-    color: #fff;
+    color: $fontcolor;
   }
   .logo{
-    line-height: 100px;
+    line-height: $headerHeight;
     float: left;
     text-transform: uppercase;
   }
   
   .menu{
     float: right;
-    line-height: 100px;
+    line-height: $headerHeight;
     font-size: 1.5rem;
     font-weight: bolder;
   }
   .menu a{
-    color: #fff;
+    color: $fontcolor;
     text-transform: uppercase;
     text-decoration: none;
     padding: 0 10px;
@@ -38,7 +40,7 @@
     float: right;
   }
   .show-menu-btn i{
-    line-height: 100px;
+    line-height: $headerHeight;
   }
   .menu a:hover,
   .show-menu-btn:hover,
@@ -50,18 +52,6 @@
     position: absolute;
     visibility: hidden;
     z-index: -1111;
-  }
-  
-  .content{
-    padding: 0 20px;
-  }
-  .content img{
-    width: 100%;
-    max-width: 700px;
-    margin: 20px 0;
-  }
-  .content p{
-    text-align: justify;
   }
   
   @media screen and (max-width:800px) {

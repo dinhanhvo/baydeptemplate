@@ -10,6 +10,8 @@
 //     display: flex; flex: 3; display: inline; padding-right: 10px; text-align: right;
 // }
 
+$fontcolor: #004D47;
+$headerHeight: 50px;
 *{
     margin: 0;
     padding: 0;
@@ -32,71 +34,24 @@
     .HomeBodyCenter {
         // margin-top: 20px;
         display: flex; 
-        background-color: #E1ECF1;
+        background-color: rgb(51, 203, 223);
     }
     
     .HomeBanner {
         display: flex; 
         // margin-top: -20px; 
-        height: 200px; width: 100%; 
+        height: 150px; width: 100%; 
         background-color: beige;
     }
     #Categories {
-        background-color: cadetblue; 
-        height: 100%;
+        background-color: #D4E9FB; 
+        // height: 100%;
     }
     .FullWidth {
         width: 100%;
     }
     .FullHeight {
         height: 100%;
-    }
-    
-    .HeaderContainer {
-        height: 115px;
-        background: #34495e;
-        padding: 0 20px;
-        color: #fff;
-    }
-    .logoheader{
-        line-height: 100px;
-        float: left;
-        text-transform: uppercase;
-    }
-    
-    .MenuHeader{
-        float: right;
-        line-height: 100px;
-    }
-    .MenuHeader a{
-        color: #fff;
-        text-transform: uppercase;
-        text-decoration: none;
-        padding: 0 10px;
-        transition: 0.4s;
-    }
-    .show-menu-btn, .hide-menu-btn {
-        transition: 0.4s;
-        font-size: 30px;
-        cursor: pointer;
-        display: none;
-    }
-    .show-menu-btn{
-        float: right;
-    }
-    .show-menu-btn i{
-        line-height: 100px;
-    }
-    .MenuHeader a:hover,
-    .show-menu-btn:hover,
-    .hide-menu-btn:hover{
-        color: #3498db;
-    }
-    
-    #chk{
-        position: absolute;
-        visibility: hidden;
-        z-index: -1111;
     }
     
     .content{
@@ -114,31 +69,6 @@
     @media screen and (max-width:800px) {
         .show-menu-btn,.hide-menu-btn{
         display: block;
-    }
-    .MenuHeader {
-        position: fixed;
-        width: 100%;
-        height: 100px;
-        background: #333;
-        right: -100%;
-        top: 0;
-        text-align: center;
-        padding: 80px 0;
-        line-height: normal;
-        transition: 0.7s;
-    }
-    .MenuHeader a{
-        display: block;
-        padding: 20px;
-        font-size: 2rem !important;
-    }
-    .hide-menu-btn{
-        position: absolute;
-        top: 40px;
-        right: 40px;
-    }
-    #chk:checked ~ .MenuHeader{
-        right: 0;
     }
 }
     
