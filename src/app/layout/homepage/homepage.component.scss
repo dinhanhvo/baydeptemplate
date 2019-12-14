@@ -11,12 +11,41 @@
 
 $fontcolor: #004D47;
 $headerHeight: 50px;
+$bodyBackground: #D4E9FB;
+$offsetW: 15px;
+
 *{
     margin: 0;
     padding: 0;
     font-family: "montserrat",sans-serif;
   }
   
+.HomeMargin {
+    flex: 1.5;
+}
+.HomeWidth {
+    flex: 9;
+}
+.HomeBody {
+    display: flex; 
+    padding-top: $offsetW; 
+    background-color: $bodyBackground;
+    min-height: 500px;
+    width: 100%;
+}
+
+.HomeBodyCenter {
+    // margin-top: 20px;
+    display: flex; 
+    background-color: rgb(51, 203, 223);
+}
+
+.HomeBanner {
+    display: flex; 
+    // margin-top: -20px; 
+    height: 150px; width: 100%; 
+    background-color: beige;
+}
   .menu{
     float: left;
     line-height: $headerHeight;
@@ -32,7 +61,7 @@ $headerHeight: 50px;
     padding: 0 10px;
     transition: 0.4s;
     display: block;
-    padding-left: 60px;
+    padding-left: 40px;
     border-bottom: 2px solid #004D47;
   }
   .show-menu-btn,.hide-menu-btn{
@@ -51,7 +80,7 @@ $headerHeight: 50px;
   .show-menu-btn:hover,
   .hide-menu-btn:hover{
     color: #3498db;
-    background-color: #D4E9FB;
+    background-color: $bodyBackground;
   }
   
   #chk{
@@ -67,6 +96,10 @@ $headerHeight: 50px;
       height: 60px;
       line-height: 60px;
       color: #fff;
+  }
+  #offset {
+    width: $offsetW; 
+    background-color: $bodyBackground;
   }
   @media screen and (max-width:800px) {
     .show-menu-btn,.hide-menu-btn{
@@ -86,7 +119,7 @@ $headerHeight: 50px;
     }
     .menu a{
       display: block;
-      padding: 20px;
+      padding: $offsetW;
     }
     .hide-menu-btn{
       position: absolute;
