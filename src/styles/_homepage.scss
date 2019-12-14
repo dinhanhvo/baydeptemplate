@@ -16,26 +16,28 @@
     font-family: "montserrat",sans-serif;
     }
     .HomeMargin {
-        flex: 2;
+        flex: 1.5;
     }
     .HomeWidth {
-        flex: 8;
+        flex: 9;
     }
     .HomeBody {
-        display: flex; margin-top: 10px; 
+        display: flex; 
+        // margin-top: 10px; 
         background-color: #D4E9FB;
         min-height: 500px;
         width: 100%;
     }
 
     .HomeBodyCenter {
-        margin-top: 20px;
+        // margin-top: 20px;
         display: flex; 
         background-color: #E1ECF1;
     }
     
     .HomeBanner {
-        display: flex; margin-top: -20px; 
+        display: flex; 
+        // margin-top: -20px; 
         height: 200px; width: 100%; 
         background-color: beige;
     }
@@ -43,7 +45,7 @@
         background-color: cadetblue; 
         height: 100%;
     }
-    .FullWdith {
+    .FullWidth {
         width: 100%;
     }
     .FullHeight {
@@ -128,6 +130,7 @@
     .MenuHeader a{
         display: block;
         padding: 20px;
+        font-size: 2rem !important;
     }
     .hide-menu-btn{
         position: absolute;

@@ -11,9 +11,10 @@ import { DashboardsComponent } from './dashboards/dashboards.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HomeHeaderComponent } from './components/home-header/home-header.component';
 import { HomeFooterComponent } from './components/home-footer/home-footer.component';
+import { HomeCarouselComponent } from './components/home-carousel/home-carousel.component';
 
 @NgModule({
   imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule],
-  declarations: [LayoutComponent, SidebarComponent, HeaderComponent, DashboardsComponent, HomepageComponent, HomeHeaderComponent, HomeFooterComponent]
+  declarations: [LayoutComponent, SidebarComponent, HeaderComponent, DashboardsComponent, HomepageComponent, HomeHeaderComponent, HomeFooterComponent, HomeCarouselComponent]
 })
 export class LayoutModule {}
