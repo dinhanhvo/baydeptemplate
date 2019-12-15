@@ -11,7 +11,7 @@ import { AuthGuard } from './shared/guard';
 import { AppConfigService } from './app-config.service';
 import { AppStoreService, AppStore } from './shared/services/app-store.service';
 import { LoginService } from './shared/services/login.service';
-
+import { DashboardModule } from './layout/dashboard/dashboard.module';
 let initConfig = (config: AppConfigService, store: AppStoreService) => async () => {
   console.log('calling config.load');
   let cf = await config.load();
@@ -31,7 +31,8 @@ let initConfig = (config: AppConfigService, store: AppStoreService) => async () 
     BrowserAnimationsModule,
     HttpClientModule,
     LanguageTranslationModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DashboardModule
   ],
   declarations: [AppComponent],
   providers: [

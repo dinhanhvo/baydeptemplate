@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('isLoggedin', 'true');
           this.appStore.login(this.username, data.data.token, this.selLang, this.selProfile);
           console.log('current session token', this.appStore.getAuth()['token']);
-          this.router.navigate(['/']);
+          this.router.navigate(['/dashboard']);
         }
       },
       error => {

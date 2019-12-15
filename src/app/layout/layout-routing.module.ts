@@ -12,10 +12,6 @@ const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'prefix' },
       { path: 'bas', loadChildren: () => import('./bas/bas.module').then(m => m.BasModule) },
       {
-        path: 'dashboards',
-        loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule)
-      },
-      {
         path: 'home',
         component: HomepageComponent
       },
@@ -39,7 +35,7 @@ const routes: Routes = [
         path: 'lovs',
         loadChildren: () => import('./lovs/lovs.module').then(m => m.LovsModule)
       },
-      { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+      // { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsModule) },
       { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
       { path: 'forms', loadChildren: () => import('./form/form.module').then(m => m.FormModule) },

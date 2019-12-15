@@ -7,7 +7,7 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
-import { DashboardsComponent } from './dashboards/dashboards.component';
+
 import { HomepageComponent } from './homepage/homepage.component';
 import { HomeHeaderComponent } from './components/home-header/home-header.component';
 import { HomeFooterComponent } from './components/home-footer/home-footer.component';
@@ -16,6 +16,6 @@ import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule],
-  declarations: [LayoutComponent, SidebarComponent, HeaderComponent, DashboardsComponent, HomepageComponent, HomeHeaderComponent, HomeFooterComponent, HomeCarouselComponent, ProductsComponent]
+  declarations: [LayoutComponent, SidebarComponent, HeaderComponent, HomepageComponent, HomeHeaderComponent, HomeFooterComponent, HomeCarouselComponent, ProductsComponent]
 })
 export class LayoutModule {}
