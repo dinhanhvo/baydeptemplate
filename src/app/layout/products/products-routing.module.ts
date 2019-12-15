@@ -16,10 +16,10 @@ const routes: Routes = [
     component: ProductsComponent,
     children: [
       { path: '', redirectTo: 'products', pathMatch: 'prefix' },
-      { path: 'products', component: ProductsComponent, 
-        children: [
-          { path: ':id', component: ProductDetailsComponent }
-        ]
+      { path: 'productsdetail', component: ProductDetailsComponent, 
+        // children: [
+        //   { path: '/:id', component: ProductDetailsComponent }
+        // ]
       }
     ]
   }

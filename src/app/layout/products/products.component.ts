@@ -101,6 +101,6 @@ export class ProductsComponent implements OnInit {
   gotoChiTiet(pr) {
     console.log('chi tiet san pham');
     console.log(pr.id);
-    this.router.navigate(['/pr.id']);
+    this.router.navigate(['/productsdetail']);
   }
 }

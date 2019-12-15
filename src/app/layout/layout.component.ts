@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
   collapedSideBar: boolean;
+  title = 'Angular Search Using ng2-search-filter';
+  searchText;
 
   constructor() {}
 

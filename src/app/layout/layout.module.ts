@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
@@ -13,9 +14,12 @@ import { HomeHeaderComponent } from './components/home-header/home-header.compon
 import { HomeFooterComponent } from './components/home-footer/home-footer.component';
 import { HomeCarouselComponent } from './components/home-carousel/home-carousel.component';
 import { ProductsComponent } from './products/products.component';
+import {ProductDetailsComponent} from './products/product-details/product-details.component';
 
 @NgModule({
-  imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule],
-  declarations: [LayoutComponent, SidebarComponent, HeaderComponent, HomepageComponent, HomeHeaderComponent, HomeFooterComponent, HomeCarouselComponent, ProductsComponent]
+  imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule, InputTextModule],
+  declarations: [LayoutComponent, SidebarComponent, HeaderComponent, HomepageComponent, 
+    HomeHeaderComponent, HomeFooterComponent, HomeCarouselComponent, ProductsComponent,
+    ProductDetailsComponent]
 })
 export class LayoutModule {}

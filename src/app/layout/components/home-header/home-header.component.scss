@@ -10,7 +10,12 @@ $headerHeight: 50px;
     background: #D4E9FB;
     padding: 0 20px;
     color: $fontcolor;
+    box-shadow: 0 8px 6px -6px blue;
+    // -webkit-box-shadow: 0 10px 6px -16px #777;
+    // -moz-box-shadow: 0 10px 6px -16px #777;
+    //      box-shadow: 0 10px 6px -16px #777;
   }
+  
   .logo{
     line-height: $headerHeight;
     float: left;
