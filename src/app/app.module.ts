@@ -12,6 +12,8 @@ import { AppConfigService } from './app-config.service';
 import { AppStoreService, AppStore } from './shared/services/app-store.service';
 import { LoginService } from './shared/services/login.service';
 import { DashboardModule } from './layout/dashboard/dashboard.module';
+// import { ProductsModule } from './layout/products/products.module';
+
 let initConfig = (config: AppConfigService, store: AppStoreService) => async () => {
   console.log('calling config.load');
   let cf = await config.load();
@@ -32,7 +34,8 @@ let initConfig = (config: AppConfigService, store: AppStoreService) => async () 
     HttpClientModule,
     LanguageTranslationModule,
     AppRoutingModule,
-    DashboardModule
+    DashboardModule,
+    // ProductsModule
   ],
   declarations: [AppComponent],
   providers: [

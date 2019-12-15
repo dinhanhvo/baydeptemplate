@@ -1,1 +1,29 @@
-<p>products works! dfdsfd</p>
+<div class="body">
+    <div class="title">
+        <h3> Sản Phẩm Nổi Bật:</h3>
+    </div>
+    <div class="container">
+        <div class="products" *ngFor="let pr of products">
+            <div class="card">
+                <!-- <div class="title">
+                Title
+                </div> -->
+                <div class="bodyCard">
+                    <div class="zoom">
+                        <img  src="{{pr.image}}" />
+                    </div>
+                    <div class="des">
+                        <p>
+                            {{pr.name}}
+                        </p>
+                    </div>
+                </div>
+                <div class="footer">
+                    <Button class="bt" (click)="gotoChiTiet(pr)">
+                        Chi Tiết
+                    </Button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

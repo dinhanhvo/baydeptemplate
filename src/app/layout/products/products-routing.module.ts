@@ -5,12 +5,22 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 
 const routes: Routes = [
   {
+    // path: '',
+    // component: ProductsComponent,
+    // children: [
+    //   { path: '', redirectTo: 'products', pathMatch: 'prefix' },
+    //   { path: 'products', component: ProductsComponent },
+    //   { path: ':id', component: ProductDetailsComponent }
+    // ]
     path: '',
     component: ProductsComponent,
     children: [
       { path: '', redirectTo: 'products', pathMatch: 'prefix' },
-      { path: 'products', component: ProductsComponent },
-      { path: 'products/:id', component: ProductDetailsComponent }
+      { path: 'products', component: ProductsComponent, 
+        children: [
+          { path: ':id', component: ProductDetailsComponent }
+        ]
+      }
     ]
   }
 ];

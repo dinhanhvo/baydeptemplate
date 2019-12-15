@@ -5,6 +5,68 @@
 #recentViewed {
     height: 400px;
 }
-#products {
-    height: 400px;
+// #products {
+//     height: 400px;
+// }
+
+.container {
+    padding: 30px 60px 30px 60px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
+.body {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #004D47;
+    .title {
+        line-height: 30px;
+        display: block;
+        background-color: #004D47;
+        padding: 10px;
+        font-size: 2rem;
+        color: #fff;
+    }
+}
+.products {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.card {
+    width: 230px;
+    height: 280px;
+    border: 1px solid greenyellow;
+    padding: 10px;
+    font-size: 2rem;
+    text-align: center;
+    margin: 10px;
+    .title {
+        border-bottom: greenyellow 2px solid;
+    }
+    .des {
+        margin-top: 10px;
+        font-size: 1.5rem;
+    }
+    .footer {
+        margin-top: 10px;
+    }
+
+    .bt {
+        padding: 0 10px;
+    }
+    img {
+        width: 130px;
+        height: 150px;
+    }
+}
+.card:hover {
+    background-color: #D4E9FB;
+}
+// .zoom:hover {
+//     -ms-transform: scale(3.5); /* IE 9 */
+//     -webkit-transform: scale(3.5); /* Safari 3-8 */
+//     transform: scale(3.5); 
+//     z-index: 1500;
+//   }
