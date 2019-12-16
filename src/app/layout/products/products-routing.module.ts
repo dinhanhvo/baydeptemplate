@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProductsComponent } from './products.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
+// import { ProductsComponent } from './products.component';
+// import { ProductDetailsComponent } from './product-details/product-details.component';
 
 const routes: Routes = [
   {
@@ -12,16 +12,16 @@ const routes: Routes = [
     //   { path: 'products', component: ProductsComponent },
     //   { path: ':id', component: ProductDetailsComponent }
     // ]
-    path: '',
-    component: ProductsComponent,
-    children: [
-      { path: '', redirectTo: 'products', pathMatch: 'prefix' },
-      { path: 'productsdetail', component: ProductDetailsComponent, 
-        // children: [
-        //   { path: '/:id', component: ProductDetailsComponent }
-        // ]
-      }
-    ]
+    // path: '',
+    // component: ProductsComponent,
+    // children: [
+    //   { path: '', redirectTo: 'products', pathMatch: 'prefix' },
+    //   { path: 'productsdetail', component: ProductDetailsComponent, 
+    //     children: [
+    //       { path: '/:id', component: ProductDetailsComponent }
+    //     ]
+    //   }
+    // ]
   }
 ];
 

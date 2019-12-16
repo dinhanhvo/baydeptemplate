@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
     },
     {
       "id": 2,
-      "name": "Máy bơm",
+      "name": "Máy Cưa",
       "description": "Máy bơm công suất cao",
       "price": 12000000,
       "type": "1",
@@ -28,7 +28,7 @@ export class ProductsComponent implements OnInit {
     },
     {
       "id": 3,
-      "name": "Máy bơm",
+      "name": "Máy Trộn Thức Ăn",
       "description": "Máy bơm công suất cao",
       "price": 13000000,
       "type": "1",
@@ -36,7 +36,7 @@ export class ProductsComponent implements OnInit {
     },
     {
       "id": 4,
-      "name": "Máy bơm",
+      "name": "Máy Hàn",
       "description": "Máy bơm công suất cao",
       "price": 14000000,
       "type": "1",
@@ -44,7 +44,7 @@ export class ProductsComponent implements OnInit {
     },
     {
       "id": 5,
-      "name": "Máy bơm",
+      "name": "Máy Công Nghiệp",
       "description": "Máy bơm công suất cao",
       "price": 15000000,
       "type": "1",
@@ -52,7 +52,7 @@ export class ProductsComponent implements OnInit {
     },
     {
       "id": 6,
-      "name": "Máy bơm",
+      "name": "Máy Nông Nghiệp",
       "description": "Máy bơm công suất cao",
       "price": 16000000,
       "type": "1",
@@ -60,7 +60,7 @@ export class ProductsComponent implements OnInit {
     },
     {
       "id": 7,
-      "name": "Máy bơm",
+      "name": "Bù Long",
       "description": "Máy bơm công suất cao",
       "price": 1700000,
       "type": "1",
@@ -68,7 +68,7 @@ export class ProductsComponent implements OnInit {
     },
     {
       "id": 8,
-      "name": "Máy bơm",
+      "name": "Ốc Vít",
       "description": "Máy bơm công suất cao",
       "price": 18000000,
       "type": "1",
@@ -76,7 +76,7 @@ export class ProductsComponent implements OnInit {
     },
     {
       "id": 9,
-      "name": "Máy bơm",
+      "name": "Link Kiện",
       "description": "Máy bơm công suất cao",
       "price": 19000000,
       "type": "1",

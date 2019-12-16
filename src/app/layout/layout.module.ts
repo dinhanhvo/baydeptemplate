@@ -19,7 +19,7 @@ import {ProductDetailsComponent} from './products/product-details/product-detail
 @NgModule({
   imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule, InputTextModule],
   declarations: [LayoutComponent, SidebarComponent, HeaderComponent, HomepageComponent, 
-    HomeHeaderComponent, HomeFooterComponent, HomeCarouselComponent, ProductsComponent,
-    ProductDetailsComponent]
+    HomeHeaderComponent, HomeFooterComponent, HomeCarouselComponent,
+    ProductDetailsComponent, ProductsComponent]
 })
 export class LayoutModule {}
